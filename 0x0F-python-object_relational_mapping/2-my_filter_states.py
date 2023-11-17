@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""lists all states from database hbtn_0e_0_usa"""
+"""
+displays all values in the states table of hbtn_0e_0_usa
+where name matches the argument
+"""
 import MySQLdb
 import sys
 
@@ -13,7 +16,9 @@ if __name__ == "__main__":
                         db=sys.argv[3]
                         )
     mycursor = db.cursor()
-    sql_query = "SELECT * FROM states ORDER by id ASC"
+    sql_query = """SELECT * \
+            FROM states WHERE name = '{:s}' \
+                    ORDER by id ASC""".format(sys.argv[4])
     mycursor.execute(sql_query)
     rows = mycursor.fetchall()
 
